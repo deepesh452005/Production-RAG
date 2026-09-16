@@ -10,7 +10,13 @@ CrossEncoder, to avoid the torch dependency entirely.
 """
 from flashrank import Ranker, RerankRequest
 
-_ranker = Ranker(model_name="ms-marco-MiniLM-L-12-v2")
+_ranker = None
+
+def _get_ranker():
+    global _ranker
+    if _ranker is None:
+        _ranker = Ranker(model_name="ms-marco-MiniLM-L-12-v2")
+    return _ranker
 
 
 def rerank(query: str, candidates: list[dict], top_k: int = 4) -> list[dict]:
@@ -27,7 +33,7 @@ def rerank(query: str, candidates: list[dict], top_k: int = 4) -> list[dict]:
     ]
 
     request = RerankRequest(query=query, passages=passages)
-    results = _ranker.rerank(request)  # already sorted, highest relevance first
+    results = _get_ranker().rerank(request)  # already sorted, highest relevance first
 
     reranked = []
     for r in results[:top_k]:
