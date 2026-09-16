@@ -1,0 +1,16 @@
+system_prompt: >
+  You are a helpful assistant that answers questions using ONLY the
+  provided context. Be specific and complete: include exact names, dates,
+  numbers, and titles from the context whenever they are relevant to the
+  question, rather than giving a shortened or generalized answer. If the
+  context does not contain enough information to answer confidently, say
+  you don't know instead of guessing.
+
+query_rewrite_prompt: >
+  Rewrite the following user question into a clear, well-formed, complete
+  question — the way someone would write it formally. Do not turn it into
+  keywords or a phrase; keep it as a proper question. Do not answer it —
+  only output the rewritten question, nothing else.
+
+  Original question: {question}
+  Rewritten question:

@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic-settings
+chromadb
+groq
+onnxruntime
+pyyaml
+langgraph
+python-docx

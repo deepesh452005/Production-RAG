@@ -1,0 +1,24 @@
+[
+  {"id": "s1", "question": "Who was the first human in space?", "expected_answer": "Yuri Gagarin, aboard Vostok 1 in 1961", "expected_source_keywords": ["Gagarin", "1961"], "type": "exact_fact"},
+  {"id": "s2", "question": "Who was the first American in space?", "expected_answer": "Alan Shepard", "expected_source_keywords": ["Shepard"], "type": "disambiguation"},
+  {"id": "s3", "question": "What year did Apollo 11 land on the Moon?", "expected_answer": "1969", "expected_source_keywords": ["Apollo 11", "1969"], "type": "exact_fact"},
+  {"id": "s4", "question": "Which Space Shuttle disaster happened in 1986?", "expected_answer": "The Challenger disaster", "expected_source_keywords": ["Challenger", "1986"], "type": "exact_fact"},
+
+  {"id": "c1", "question": "Who introduced public key cryptography in 1976?", "expected_answer": "Whitfield Diffie and Martin Hellman", "expected_source_keywords": ["Diffie", "Hellman"], "type": "exact_fact"},
+  {"id": "c2", "question": "Who developed the RSA algorithm?", "expected_answer": "Ron Rivest, Adi Shamir, and Leonard Adleman", "expected_source_keywords": ["Rivest", "Shamir", "Adleman"], "type": "exact_fact"},
+  {"id": "c3", "question": "What key size does DES use?", "expected_answer": "56-bit", "expected_source_keywords": ["DES", "56-bit"], "type": "exact_fact"},
+  {"id": "c4", "question": "Who first broke the Enigma cipher's logical structure?", "expected_answer": "Marian Rejewski", "expected_source_keywords": ["Rejewski"], "type": "exact_fact"},
+
+  {"id": "i1", "question": "When did ARPANET connect its first two nodes?", "expected_answer": "October 29, 1969, connecting UCLA and the Stanford Research Institute", "expected_source_keywords": ["1969", "UCLA"], "type": "exact_fact"},
+  {"id": "i2", "question": "When did ARPANET switch to TCP/IP?", "expected_answer": "January 1, 1983", "expected_source_keywords": ["1983", "TCP/IP"], "type": "disambiguation"},
+  {"id": "i3", "question": "Who invented the World Wide Web?", "expected_answer": "Tim Berners-Lee", "expected_source_keywords": ["Berners-Lee"], "type": "exact_fact"},
+  {"id": "i4", "question": "Who founded Google?", "expected_answer": "Larry Page and Sergey Brin", "expected_source_keywords": ["Page", "Brin"], "type": "exact_fact"},
+
+  {"id": "o1", "question": "Who first reached the Challenger Deep in 1960?", "expected_answer": "Jacques Piccard and Don Walsh", "expected_source_keywords": ["Piccard", "Walsh", "1960"], "type": "disambiguation"},
+  {"id": "o2", "question": "Who made a solo dive to the Challenger Deep in 2012?", "expected_answer": "James Cameron", "expected_source_keywords": ["Cameron", "2012"], "type": "disambiguation"},
+  {"id": "o3", "question": "Who discovered hydrothermal vents in 1977?", "expected_answer": "A team using the submersible Alvin, at the Galapagos Rift", "expected_source_keywords": ["Alvin", "Galapagos", "1977"], "type": "exact_fact"},
+  {"id": "o4", "question": "Who located the wreck of the Titanic?", "expected_answer": "Robert Ballard, in 1985", "expected_source_keywords": ["Ballard", "1985"], "type": "exact_fact"},
+
+  {"id": "r1", "question": "What is the best pizza topping?", "expected_answer": "REFUSE", "expected_source_keywords": [], "type": "out_of_scope"},
+  {"id": "r2", "question": "What is quantum computing?", "expected_answer": "REFUSE", "expected_source_keywords": [], "type": "out_of_scope"}
+]

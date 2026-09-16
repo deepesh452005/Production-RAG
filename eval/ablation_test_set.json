@@ -1,0 +1,21 @@
+[
+  {"id": "s1", "question": "Who was the first human in space?", "expected_source_keywords": ["Gagarin", "1961"]},
+  {"id": "s2", "question": "Who was the first American in space?", "expected_source_keywords": ["Shepard"]},
+  {"id": "s3", "question": "What year did Apollo 11 land on the Moon?", "expected_source_keywords": ["Apollo 11", "1969"]},
+  {"id": "s4", "question": "Which Space Shuttle disaster happened in 1986?", "expected_source_keywords": ["Challenger", "1986"]},
+
+  {"id": "c1", "question": "Who introduced public key cryptography in 1976?", "expected_source_keywords": ["Diffie", "Hellman"]},
+  {"id": "c2", "question": "Who developed the RSA algorithm?", "expected_source_keywords": ["Rivest", "Shamir", "Adleman"]},
+  {"id": "c3", "question": "What key size does DES use?", "expected_source_keywords": ["DES", "56-bit"]},
+  {"id": "c4", "question": "Who broke the Enigma cipher's logical structure first?", "expected_source_keywords": ["Rejewski"]},
+
+  {"id": "i1", "question": "When did ARPANET connect its first two nodes?", "expected_source_keywords": ["1969", "UCLA"]},
+  {"id": "i2", "question": "When did ARPANET switch to TCP/IP?", "expected_source_keywords": ["1983", "TCP/IP"]},
+  {"id": "i3", "question": "Who invented the World Wide Web?", "expected_source_keywords": ["Berners-Lee"]},
+  {"id": "i4", "question": "Who founded Google?", "expected_source_keywords": ["Page", "Brin"]},
+
+  {"id": "o1", "question": "Who first reached the Challenger Deep in 1960?", "expected_source_keywords": ["Piccard", "Walsh", "1960"]},
+  {"id": "o2", "question": "Who made a solo dive to the Challenger Deep in 2012?", "expected_source_keywords": ["Cameron", "2012"]},
+  {"id": "o3", "question": "Who discovered hydrothermal vents in 1977?", "expected_source_keywords": ["Alvin", "Galapagos", "1977"]},
+  {"id": "o4", "question": "Who located the wreck of the Titanic?", "expected_source_keywords": ["Ballard", "1985"]}
+]

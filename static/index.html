@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI History Assistant</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+  .chat-container {
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+  }
+  h1 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: #f8fafc;
+  }
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 4px;
+  }
+  .message {
+    padding: 12px 16px;
+    border-radius: 12px;
+    max-width: 80%;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+  .user {
+    align-self: flex-end;
+    background: #2563eb;
+    color: white;
+  }
+  .assistant {
+    align-self: flex-start;
+    background: #1e293b;
+    border: 1px solid #334155;
+  }
+  .meta {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 6px;
+  }
+  .input-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  input[type="text"] {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #1e293b;
+    color: #f8fafc;
+    font-size: 14px;
+  }
+  button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:disabled {
+    background: #475569;
+    cursor: not-allowed;
+  }
+  .loading {
+    font-style: italic;
+    color: #94a3b8;
+  }
+</style>
+</head>
+<body>
+
+<div class="chat-container">
+  <h1>AI History Assistant</h1>
+  <div class="messages" id="messages"></div>
+  <div class="input-row">
+    <input type="text" id="questionInput" placeholder="Ask something about AI history..." />
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+
+<script>
+  const messagesEl = document.getElementById('messages');
+  const inputEl = document.getElementById('questionInput');
+  const sendBtn = document.getElementById('sendBtn');
+
+  function addMessage(text, role, meta) {
+    const div = document.createElement('div');
+    div.className = `message ${role}`;
+    div.textContent = text;
+    if (meta) {
+      const metaDiv = document.createElement('div');
+      metaDiv.className = 'meta';
+      metaDiv.textContent = meta;
+      div.appendChild(metaDiv);
+    }
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return div;
+  }
+
+  async function sendQuestion() {
+    const question = inputEl.value.trim();
+    if (!question) return;
+
+    addMessage(question, 'user');
+    inputEl.value = '';
+    sendBtn.disabled = true;
+
+    const loadingDiv = addMessage('Thinking...', 'assistant loading');
+
+    try {
+      const response = await fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question })
+      });
+      const data = await response.json();
+
+      loadingDiv.remove();
+
+      let meta = '';
+      if (data.from_cache) meta = 'from cache';
+      else if (data.guardrail_triggered) meta = `refused (top score: ${data.top_rerank_score})`;
+      else if (data.retrieved && data.retrieved.length) meta = `${data.retrieved.length} sources used`;
+
+      addMessage(data.answer, 'assistant', meta);
+    } catch (err) {
+      loadingDiv.remove();
+      addMessage('Something went wrong: ' + err.message, 'assistant');
+    } finally {
+      sendBtn.disabled = false;
+      inputEl.focus();
+    }
+  }
+
+  sendBtn.addEventListener('click', sendQuestion);
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sendQuestion();
+  });
+</script>
+
+</body>
+</html>
