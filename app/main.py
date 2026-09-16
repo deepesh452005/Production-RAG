@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from pathlib import Path
 from app.core.rag_service import ask
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
