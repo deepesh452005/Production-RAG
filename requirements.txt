@@ -4,6 +4,8 @@ pydantic-settings
 chromadb
 groq
 onnxruntime
-pyyaml
+rank_bm25
+flashrank
 langgraph
 python-docx
+pyyaml
