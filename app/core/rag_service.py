@@ -18,7 +18,13 @@ from app.retrieval.reranker import rerank
 from app.core.llm_client import generate_answer, rewrite_query
 from app.utils.logger import log_request
 
-_retriever = HybridRetriever()
+_retriever = None
+
+def get_retriever() -> HybridRetriever:
+    global _retriever
+    if _retriever is None:
+        _retriever = HybridRetriever()
+    return _retriever
 
 FINAL_TOP_K = 4
 RERANK_CANDIDATE_POOL = 10
@@ -59,7 +65,7 @@ def cache_check_node(state: RAGState) -> dict:
 
 
 def retrieve_node(state: RAGState) -> dict:
-    candidates = _retriever.query(state["rewritten_query"], return_pool=RERANK_CANDIDATE_POOL)
+    candidates = get_retriever().query(state["rewritten_query"], return_pool=RERANK_CANDIDATE_POOL)
     return {"candidates": candidates}
 
 

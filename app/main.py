@@ -5,6 +5,9 @@ from app.core.rag_service import ask
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from app.core.rag_service import ask
+from app.ingestion.loader import load_documents
+from app.ingestion.chunker import chunk_text
+from app.core.rag_service import ask, get_retriever
 
 app = FastAPI(title="RAG Assistant - Phase 1")
 
@@ -12,16 +15,15 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.on_event("startup")
 def ensure_ingested():
-    """
-    If the vector database doesn't exist yet (e.g. first boot on a host
-    with ephemeral storage), run ingestion automatically so the app
-    always has a working knowledge base without manual setup.
-    """
-    chroma_path = Path("data/chroma_db")
-    if not chroma_path.exists():
+    marker = Path("data/chunks_cache.json")
+    if not marker.exists():
         print("No existing index found — running ingestion...")
-        import subprocess
-        subprocess.run(["python", "ingest.py"], check=True)
+        docs = load_documents("data")
+        all_chunks = []
+        for doc in docs:
+            all_chunks.extend(chunk_text(doc["text"], doc["source"]))
+        print(f"Found {len(docs)} document(s), split into {len(all_chunks)} chunk(s).")
+        get_retriever().index(all_chunks)
         print("Ingestion complete.")
 
 @app.get("/")
