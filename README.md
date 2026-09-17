@@ -182,4 +182,3 @@ A few notable engineering decisions made along the way, based on real debugging 
 - Semantic caching (catching reworded duplicates without needing an LLM rewrite first)
 - Multi-step retrieval for genuinely multi-part questions
 - Agent capabilities (the LangGraph structure is already suited for this)
-- Real deployment (hosting, authentication, a managed vector DB)
